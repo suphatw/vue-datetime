@@ -6,7 +6,7 @@
           <path fill="none" stroke="#444" stroke-width="14" stroke-miterlimit="10" d="M56.3 97.8L9.9 51.4 56.3 5"/>
         </svg>
       </div>
-      <div class="vdatetime-calendar__current--month">{{ monthName }} {{ newYear }}</div>
+      <div class="vdatetime-calendar__current--month">{{ monthName }} {{ newYearLocal }}</div>
       <div class="vdatetime-calendar__navigation--next" @click="nextMonth">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 61.3 102.8">
           <path fill="none" stroke="#444" stroke-width="14" stroke-miterlimit="10" d="M56.3 97.8L9.9 51.4 56.3 5"/>
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { DateTime } from 'luxon'
+import { DateTime, Settings } from 'luxon'
 import { monthDayIsDisabled, monthDays, months, weekdays } from './util'
 
 export default {
@@ -68,6 +68,13 @@ export default {
   computed: {
     newYear () {
       return this.newDate.year
+    },
+    newYearLocal () {
+      const current = DateTime.fromFormat(this.newDate.year.toString(), 'yyyy')
+      const yearString = current
+        .reconfigure({ outputCalendar: Settings.defaultOuputCalendar })
+        .toFormat('yyyy')
+      return parseInt(yearString)
     },
     newMonth () {
       return this.newDate.month
