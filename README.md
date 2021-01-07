@@ -127,6 +127,15 @@ import { Settings } from 'luxon'
 Settings.defaultLocale = 'es'
 ```
 
+Thailand date
+
+```js
+import { Settings } from "luxon";
+
+Settings.defaultLocale = "th";
+Settings.defaultOuputCalendar = "buddhist";
+```
+
 ### Events
 
 Component emits the `input` event to work with `v-model`. [More info](https://vuejs.org/v2/guide/components.html#Form-Input-Components-using-Custom-Events).
